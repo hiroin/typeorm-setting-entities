@@ -7,6 +7,7 @@ git clone https://github.com/hiroin/typeorm-setting-entities.git
 cd typeorm-setting-entities
 docker-compose up -d
 cd ../nestjs
+npm install
 npm run start:dev
 ```
 ![image](https://user-images.githubusercontent.com/50547466/145219474-9bb7b7ed-abec-4fd7-b4da-fd7ad7105cae.png)
