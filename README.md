@@ -77,5 +77,5 @@ SyntaxError: Cannot use import statement outside a module
 とエラーがでる。
 
 ## 推測
-NestJSはコンパイルされたJavaScriptで動作するので、TypeORMに読み込ませるEntityの情報はJavaScript(.js)でなければならない(importがSyntaxErrorになる)のに対して、Jestでテストをする場合、テストファイルはTypeScriptで書かれているものをJestがトランスコンパイルして生成されたJavascriptで動作するので、TypeORMに読み込ませるEntityの情報は(おそらく依存関係の解決のために)TypeScript(.ts)でなければならない(dist/entities/\*/.entity.jsを読み込んでくれない?)のだと思います、たぶん…
+NestJSはコンパイルされたJavaScriptで動作するので、TypeORMに読み込ませるEntityの情報はJavaScript(.js)でなければならない(importがSyntaxErrorになる)のに対して、Jestでテストをする場合、テストファイルはTypeScriptで書かれているものをJestがトランスコンパイルして生成されたJavascriptで動作するので、TypeORMに読み込ませるEntityの情報は(おそらく依存関係の解決のために)TypeScript(.ts)でなければならない(dist/entities/\*/.entity.jsを読み込んでくれない?)のだと思います、たぶん…  
 ちゃんとした理由をご存知でしたらご教示頂きたいです。
