@@ -37,3 +37,45 @@ npm run test:e2e
 ```
 docker-compose down
 ```
+
+## 見どころ
+
+ormconfig.jsonのentitiesをNestJS用とjest/e2eテスト用で切り替える必要がある。
+このサンプルの場合、NestJS用は、
+```
+"entities": ["dist/entities/*.entity.js"],
+```
+jest/e2eテスト用は、
+```
+"entities": ['./src/entities/*.entity.ts']
+```
+とする必要がある。
+
+## エラーが出るケース(1)
+```
+"entities": ["dist/entities/*.entity.js"],
+```
+と設定して、Jestでテストをしようとすると
+```
+    RepositoryNotFoundError: No repository for "Users" was found. Looks like this entity is not registered in current "default" connection?
+```
+とエラーがでる。
+
+## エラーが出るケース(2)
+```
+"entities": ['./src/entities/*.entity.ts']
+````
+と設定して、npm run start:devすると
+```
+[Nest] 17012  - 2021/12/08 16:53:42   ERROR [TypeOrmModule] Unable to connect to the database. Retrying (1)...
+D:\42\ft_transcendence\github\pong\server\src\entities\accomplishes.entity.ts:1
+import {
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+```
+とエラーがでる。
+
+## 推測
+NestJSはコンパイルされたJavaScriptで動作するので、TypeORMに読み込ませるEntityの情報はJavaScript(.js)でなければならない(importがSyntaxErrorになる)のに対して、Jestでテストをする場合、テストファイルはTypeScriptで書かれているものをJestがトランスコンパイルして生成されたJavascriptで動作するので、TypeORMに読み込ませるEntityの情報は(おそらく依存関係の解決のために)TypeScript(.ts)でなければならない(dist/entities/\*/.entity.jsを読み込んでくれない?)のだと思います、たぶん…
+ちゃんとした理由をご存知でしたらご教示頂きたいです。
