@@ -1,0 +1,13 @@
+version: '3'
+services:
+  ft_trancendence_postgres:
+    image: postgres:14-alpine
+    ports:
+      - 5435:5435
+    environment:
+      LANG: ja_JP.utf8
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: example
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
